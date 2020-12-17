@@ -14,7 +14,7 @@ jobs:
     - uses: actions/checkout@v2
     # We are building this application with Java 11
     - name: Setup Java JDK
-      uses: actions/setup-java@v1.3.0
+      uses: actions/setup-java@v1.4.3
       with:
         java-version: 11.0.x
     - name: Package with maven
@@ -35,7 +35,6 @@ jobs:
       run: ${GITHUB_WORKSPACE}/sl analyze --wait --app shiftleft-java-demo --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --java --cpg target/hello-shiftleft-0.0.1.jar
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
-        SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
         
   Build-Rules: 
     runs-on: ubuntu-latest
