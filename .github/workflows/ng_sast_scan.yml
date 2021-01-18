@@ -37,6 +37,7 @@ jobs:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
         SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
     - name: Validate Build Rules
+      if: github.ref != 'refs/heads/master'
       run: ${GITHUB_WORKSPACE}/sl check-analysis --app shiftleft-java-demo \
             --branch "${{ github.head_ref || steps.extract_branch.outputs.branch }}" \
             --report \
