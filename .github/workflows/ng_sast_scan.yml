@@ -40,6 +40,7 @@ jobs:
       if: github.ref != 'refs/heads/master'
       run: ${GITHUB_WORKSPACE}/sl check-analysis --app shiftleft-java-demo \
             --branch "${{ github.head_ref || steps.extract_branch.outputs.branch }}" \
+            --target master 
             --report \
             --github-pr-number=${{github.event.number}} \
             --github-pr-user=${{ github.repository_owner }} \
