@@ -1,5 +1,5 @@
 source:
-  scan: master
+  scan: main
 build_rules:
   - id: allow-zero-findings
     finding_types:
