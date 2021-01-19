@@ -6,4 +6,3 @@ build_rules:
       - vuln
     severity:
       - SEVERITY_HIGH_IMPACT
-    threshold: 0
