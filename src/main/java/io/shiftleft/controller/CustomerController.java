@@ -123,6 +123,7 @@ public class CustomerController {
 	  }
 
 	  Account account = new Account(4242l,1234, "savings", 1, 0);
+	  // TODO: cheap trace for debugging, be sure to remove!
 	  log.info("Account Data is {}", account);
 	  log.info("Customer Data is {}", customer);
 
