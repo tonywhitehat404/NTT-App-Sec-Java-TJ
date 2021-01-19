@@ -43,6 +43,7 @@ jobs:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
         SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
     - name: Validate Build Rules
+      # Only run on branches and compare to Main as set in the build rules file Shiftleft.yml
       if: github.ref != 'refs/heads/main'
       run: | 
             ${GITHUB_WORKSPACE}/sl check-analysis --app shiftleft-java-demo \
