@@ -32,12 +32,14 @@ jobs:
       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       id: extract_branch
     - name: NextGen Static Analysis
-      run: ${GITHUB_WORKSPACE}/sl analyze --wait --app shiftleft-java-demo --tag app.group=HSL --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --java --cpg target/hello-shiftleft-0.0.1.jar
+      run: ${GITHUB_WORKSPACE}/sl analyze --wait --app shiftleft-java-demo --tag app.group=HSL --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --java --cpg target/hello-shiftleft-*.jar
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
         SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
     - name: Validate Build Rules
-      run: ${GITHUB_WORKSPACE}/sl check-analysis --app shiftleft-java-demo \
+      if: github.ref != 'refs/heads/main'
+      run: | 
+            ${GITHUB_WORKSPACE}/sl check-analysis --app shiftleft-java-demo \
             --branch "${{ github.head_ref || steps.extract_branch.outputs.branch }}" \
             --report \
             --github-pr-number=${{github.event.number}} \
