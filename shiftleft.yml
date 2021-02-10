@@ -7,6 +7,7 @@ build_rules:
     severity:
       - SEVERITY_HIGH_IMPACT
 #  - id: build-rule-enchalada
+#    finding_types:
 #      - vuln
 #      - secret
 #      - insight
