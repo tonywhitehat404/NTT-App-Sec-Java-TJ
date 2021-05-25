@@ -1,7 +1,7 @@
 source:
   branch: main
 build_rules:
-  - id: allow-zero-high-impact
+  - id: no-net-new-high-impact
     finding_types:
       - vuln
       - secret      
