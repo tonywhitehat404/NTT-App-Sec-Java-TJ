@@ -40,8 +40,16 @@ jobs:
       id: extract_branch
     - name: Branch name
       run: echo running on branch ${GITHUB_REF##*/}
-    - name: NextGen Static Analysis
+    - name: NextGen Static Analysis PR
+      if: ${{ github.event_name == 'pull_request' }}
       run: ${GITHUB_WORKSPACE}/sl analyze --wait --app shiftleft-java-demo --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --java --sca target/hello-shiftleft-*.jar
+      env:
+        SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
+        SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
+    - name: NextGen Static Analysis trunk
+      # Removed the --wait since we want be checking the scan
+      if: ${{ github.ref == 'refs/heads/main' }}
+      run: ${GITHUB_WORKSPACE}/sl analyze --app shiftleft-java-demo --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --java --sca target/hello-shiftleft-*.jar
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
         SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
