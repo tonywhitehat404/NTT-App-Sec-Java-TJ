@@ -4,7 +4,7 @@ build_rules:
   - id: no-net-new-high-impact
     finding_types:
       - vuln
-      - secret      
+      - secrets      
     severity:
       - SEVERITY_HIGH_IMPACT
 #  - id: build-rule-enchalada
