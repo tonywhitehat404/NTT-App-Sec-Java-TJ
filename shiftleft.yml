@@ -6,7 +6,8 @@ build_rules:
       - vuln
       - secrets      
     severity:
-      - SEVERITY_HIGH_IMPACT
+      - "critical" 
+      - "moderate"
 #  - id: build-rule-enchalada
 #    finding_types:
 #      - vuln
