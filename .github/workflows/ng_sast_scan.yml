@@ -54,9 +54,11 @@ jobs:
       # --wait in place because we will run check-analysis with this scan
       if: ${{ github.event_name == 'pull_request' }}
       run: | 
-      ${GITHUB_WORKSPACE}/sl analyze --wait --app ${{ github.event.repository.name }}  --version-id ${{ github.head_ref || steps.extract_branch.outputs.branch }} \
-      --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --java  target/hello-shiftleft-*.jar
-      env:
+          ${GITHUB_WORKSPACE}/sl analyze --wait --app ${{ github.event.repository.name }} \
+          --version-id ${{ github.head_ref || steps.extract_branch.outputs.branch }} \
+          --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} \ 
+          --java  target/hello-shiftleft-*.jar
+      env: 
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
         SHIFTLEFT_ORG_ID: ${{ secrets.SHIFTLEFT_ORG_ID }}
     - name: Validate Build Rules
